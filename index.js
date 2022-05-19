@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const breadRoutes = require('./controllers/bread_controllers')
+const methodOverride = require('method-override')
 
 const app = express()
 
@@ -11,7 +12,8 @@ app.engine('jsx', require('express-react-views').createEngine())
 
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
-// app.use(express.json())
+app.use(methodOverride('_method'))
+
 
 
 // routes
