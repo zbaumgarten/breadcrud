@@ -1,5 +1,4 @@
 const express = require('express')
-const res = require('express/lib/response')
 const router = express.Router()
 const Bread = require('../models/bread')
 
@@ -49,6 +48,26 @@ router.post('/', (req, res) => {
 router.delete('/:arrayIndex', (req, res) => {
     Bread.splice(req.params.arrayIndex, 1)
     res.status(303).redirect('/breads')
+})
+
+// EDIT
+breads.get('/:indexArray/edit', (req, res) => {
+    res.render('edit', {
+      bread: Bread[req.params.indexArray],
+      index: req.params.indexArray
+    })
+})
+
+
+//update bread
+router.put('/:arrayIndex', (req, res) => {
+    if(req.body.hasGluten ==='on') {
+        req.body.hasGluten = true
+    } else {
+        req.body.hasGluten = false
+    }
+    Bread[arrayIndex] = req.body
+    res.redirect(`/breads/${arrayIndex}`)
 })
 
 module.exports = router

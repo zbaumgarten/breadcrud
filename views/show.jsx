@@ -13,6 +13,7 @@ function Show({ bread, index }) {
                 have gluten.
             </p>
             <img src={bread.image} alt={bread.name} />
+            <a href={`/breads/${index}/edit`}>Edit</a>
             <form method='POST' action={`/breads/$${index}?_method=DELETE`}>
                 <input type="submit" value="DELETE" />
             </form>
