@@ -2,7 +2,7 @@ const React = require('react')
 const Default = require('.layouts/default')
 
 //ternary operator
-function Show({ bread, index }) {
+function Show({ bread }) {
     console.log(bread.name)
     return (
         <Default>
@@ -13,8 +13,8 @@ function Show({ bread, index }) {
                 have gluten.
             </p>
             <img src={bread.image} alt={bread.name} />
-            <a href={`/breads/${index}/edit`}>Edit</a>
-            <form method='POST' action={`/breads/$${index}?_method=DELETE`}>
+            <a href={`/breads/${bread._id}/edit`}>Edit</a>
+            <form method='POST' action={`/breads/$${bread._id}?_method=DELETE`}>
                 <input type="submit" value="DELETE" />
             </form>
         </Default>
