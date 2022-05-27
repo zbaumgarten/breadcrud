@@ -1,9 +1,9 @@
 const React = require('react')
-const Default = require('.layouts/default')
+const Default = require('./layouts/default')
 
 //ternary operator
 function Show({ bread }) {
-    console.log(bread.name)
+    const bakedBy = bread.bakedBy()
     return (
         <Default>
             <h2>Show Page</h2>
@@ -13,6 +13,7 @@ function Show({ bread }) {
                 have gluten.
             </p>
             <img src={bread.image} alt={bread.name} />
+            <p>{bakedBy}</p>
             <a href={`/breads/${bread._id}/edit`}>Edit</a>
             <form method='POST' action={`/breads/$${bread._id}?_method=DELETE`}>
                 <input type="submit" value="DELETE" />

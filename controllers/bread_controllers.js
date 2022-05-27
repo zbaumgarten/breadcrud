@@ -1,12 +1,35 @@
 const express = require('express')
-const bread = require('../models/bread')
+// const bread = require('../models/bread')
 const router = express.Router()
 const Bread = require('../models/bread')
+const seedData = require('../models/seed')
+
+
+router.get('/test/:name', async (req, res) => {
+    const breads = await Bread.getBakedBy(req.params.name)
+    res.render(breads)
+})
 
 
 //mak new bred
 router.get('/new', (req, res) => {
     res.render('new')
+})
+
+function test(req, res, next) {
+    console.log('yeet')
+    next()
+}
+
+//see data
+router.get('/seed', test, async (req, res) => {
+    try {
+        await Bread.insertMany(seedData)
+        res.redirect('/breads')
+    } catch (error) {
+        console.log(error)
+        res.send("ERROR")
+    }
 })
 
 // get all bread
@@ -28,7 +51,7 @@ router.get('/:id', async (req, res) => {
     try {
         const { id } = req.params
         const bread = await Bread.findById(id)
-        console.log(bread)
+        console.log(bread.bakedBy())
         res.render('show', {
             bread
         })
