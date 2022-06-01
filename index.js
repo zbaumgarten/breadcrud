@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const breadRoutes = require('./controllers/bread_controllers')
+const bakerRoutes = require('./controllers/baker_controller')
 const methodOverride = require('method-override')
 
 const app = express()
@@ -17,6 +18,7 @@ app.use(methodOverride('_method'))
 
 // routes
 app.use('/breads', breadRoutes)
+app.use('/bakers', bakerRoutes)
 
 app.get('/', (req, res) => {
     res.send("Welcome to Bread!")
